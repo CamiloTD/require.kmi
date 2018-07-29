@@ -177,6 +177,11 @@ require = (function(){
 								var request = GET(path);
 
 							if(request.status === 404){ // If not found
+								path =`${path.substring(0, path.length - 3)}.min.js`; // Adjust path to /index.js
+								request = GET(path); // Request
+							}
+
+							if(request.status === 404){ // If not found
 								path =`${path.substring(0, path.length - 3)}/index.js`; // Adjust path to /index.js
 								request = GET(path); // Request
 							}
