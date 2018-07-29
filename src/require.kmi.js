@@ -1,11 +1,19 @@
-/*
-*
-*	Author: "Camilo Torres"
-*
-*/
 require = (function(){
-	/* @require(String path[, String caller_folder]) throws BADTYPE, UNKEXT
+	/** 
+	 * Main require function
 	 *
+	 * @function require
+	 * @param {String} path - Path string for the module
+	 * @param {String} [caller_folder] - Caller folder of the requiring function (normally you wont override this param)
+	 *
+	 * @throws {BADTYPE_PATH} When the path's type is not a String:
+	 * @throws {BADTYPE_CALLER_FOLDER} When the caller_folder's type is not a String:
+	 * @throws {UNLEXT} When the target extension's handler is not defined:
+	 *
+	 * @returns {Any}
+	 */
+
+	/*
 	 * + Check if the path has been cached
 	 * 	- If it is cached, then return the cached module
 	 * + Search for a module handler that matches 'path'
@@ -16,13 +24,13 @@ require = (function(){
 	 * + Returns the loaded module
 	 */
 
-		function require (path, caller_folder) {
+	function require (path, caller_folder) {
 			/* Check if types are correct */
 				caller_folder = caller_folder || '';
 				if(typeof path !== "string")
-					throw { code: 'BADTYPE', message: "Module path must be a String." };
+					throw "BADTYPE_PATH"
 				if(typeof caller_folder !== "string")
-					throw { code: 'BADTYPE', message: "Module caller_folder must be a String." };
+					throw "BADTYPE_CALLER_FOLDER";
 			/* Get extension (.js) by default */
 				var ext = path.substring(path.lastIndexOf('/'));
 
@@ -48,7 +56,7 @@ require = (function(){
 					if(!module.disposable) require.modules[path] = module; // If module.disposable flag is not activated, then cache
 
 					return module.exports; // return the module.exports
-				} else throw { code: 'UNKEXT', message: `Unknown Extension ${ext} for ${path}` }; // Throw if no handler found
+				} else throw 'UNKEXT'; // Throw if no handler found
 		 }
 
 	/* @require.resolve(String path, String base[, String parent]);
@@ -116,7 +124,22 @@ require = (function(){
 		 }
 
 	/* Handler wrappers */
+		/**
+		*	<b>require.setHandler</b> Adds a handler to file extensions, use this when you want to add support to another filetypes
+		*
+		*	@function setHandler
+		*	@param {String}   ext - File extension to handle
+		*	@param {Function | String} fn  - Handler function, if it's a string, it will use the same handler as the fn extension value
+		*/
 		require.setHandler = (ext, fn) => require.handlers[ext.toLowerCase()] = fn;
+
+		/**
+		*	<b>require.setHandler</b> Returns extension handler for specified ext
+		*
+		*	@function getHandler
+		*	@param {String} ext - Extension name
+		*	@returns {Function} Extension handler
+		*/
 		require.getHandler = (ext) => {
 			var handler = require.handlers[ext.toLowerCase()];
 			if(typeof handler === 'string')

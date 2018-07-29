@@ -1,0 +1,42 @@
+{
+  "name": "require.kmi",
+  "version": "1.0.0",
+  "description": "Lightweight, simple and synchronous require module for client",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "opn": "^5.3.0"
+  },
+  "devDependencies": {
+    "@pixi/jsdoc-template": "^2.4.2",
+    "jsdoc": "^3.5.5"
+  },
+  "scripts": {
+    "test": "node test",
+    "generate-docs": "node_modules/.bin/jsdoc -c jsdoc.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CamiloTD/require.kmi.git"
+  },
+  "keywords": [
+    "require",
+    "js",
+    "module",
+    "front-end",
+    "coraline",
+    "client",
+    "js",
+    "css",
+    "html"
+  ],
+  "author": "CamiloTD",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/CamiloTD/require.kmi/issues"
+  },
+  "homepage": "https://github.com/CamiloTD/require.kmi#readme"
+}
