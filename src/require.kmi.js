@@ -182,7 +182,7 @@ require = (function(){
 							}
 
 							if(request.status === 404){ // If not found
-								path =`${path.substring(0, path.length - 3)}/index.js`; // Adjust path to /index.js
+								path =`${path.substring(0, path.length - 6)}/index.js`; // Adjust path to /index.js
 								request = GET(path); // Request
 							}
 
