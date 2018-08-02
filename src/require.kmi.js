@@ -229,7 +229,7 @@ require = (function(){
 			var div = document.createElement('div');
 		  	div.innerHTML = content;
 
-		  	return div.firstChild;
+		  	module.exports = div.firstChild;
 		});
 
 
